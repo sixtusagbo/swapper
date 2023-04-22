@@ -36,15 +36,15 @@
                 <h4>Swap</h4>
                 <div id="form">
                     <div class="swapbox">
-                        <div class="swapbox_select token_select">
+                        <div class="swapbox_select token_select" id="from_token_select">
                             SELECT A TOKEN
                         </div>
                         <div class="swapbox_select">
-                            <input class="number form-control" placeholder="amount">
+                            <input class="number form-control" placeholder="amount" id="from_amount">
                         </div>
                     </div>
                     <div class="swapbox">
-                        <div class="swapbox_select token_select">
+                        <div class="swapbox_select token_select" id="to_token_select">
                             SELECT A TOKEN
                         </div>
                         <div class="swapbox_select">
@@ -53,6 +53,23 @@
                     </div>
                     <div class="gas_estimate_label">Estimated Gas: <span id="gas_estimate"></span></div>
                     <button disabled class="btn btn-large btn-primary btn-block" id="swap_button">Swap</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Select token modal -->
+        <div class="modal" id="token_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Select a Token</h5>
+                        <button id="modal_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Display list of tokens.</p>
+                    </div>
                 </div>
             </div>
         </div>
