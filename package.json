@@ -1,12 +1,12 @@
 {
   "dependencies": {
+    "bignumber.js": "^9.1.1",
     "qs": "^6.11.1"
   },
   "name": "swapper",
   "description": "A token swap dapp with [0x](https://0x.org) API",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
