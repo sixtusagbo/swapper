@@ -1,3 +1,7 @@
+let currentTrade = {};
+// To keep track of which side of the token select I am on
+let currentSelectSide;
+
 async function connect() {
   // Check if MetaMask is installed, if it is, try connecting to an account
   if (typeof window.ethereum !== 'undefined') {
@@ -28,7 +32,8 @@ async function connect() {
   }
 }
 
-function openModal() {
+function openModal(side) {
+  currentSelectSide = side;
   document.getElementById('token_modal').style.display = 'block';
 }
 
@@ -38,6 +43,12 @@ function closeModal() {
 
 async function init() {
   console.log('initializing');
+  if (currentTrade.from === undefined) {
+    document.getElementById('from_token_text').innerHTML = 'SELECT A TOKEN';
+  }
+  if (currentTrade.to === undefined) {
+    document.getElementById('to_token_text').innerHTML = 'SELECT A TOKEN';
+  }
   listAvailableTokens();
 }
 
@@ -58,7 +69,26 @@ async function listAvailableTokens() {
     let html = `<img class="token_list_img" src="${token.logoURI}"> <span class="token_list_text">
     ${token.name} (${token.symbol})</span>`;
     div.innerHTML = html;
+    div.onclick = () => selectToken(token);
     parent.appendChild(div);
+  }
+}
+
+function selectToken(token) {
+  closeModal();
+  currentTrade[currentSelectSide] = token;
+  console.log('currentTrade: ', currentTrade);
+  renderSelectedTokenInterface();
+}
+
+function renderSelectedTokenInterface() {
+  if (currentTrade.from) {
+    document.getElementById('from_token_img').src = currentTrade.from.logoURI;
+    document.getElementById('from_token_text').innerHTML = `${currentTrade.from.name} (${currentTrade.from.symbol})`;
+  }
+  if (currentTrade.to) {
+    document.getElementById('to_token_img').src = currentTrade.to.logoURI;
+    document.getElementById('to_token_text').innerHTML = `${currentTrade.to.name} (${currentTrade.to.symbol})`;
   }
 }
 
@@ -66,6 +96,6 @@ async function listAvailableTokens() {
 init();
 
 document.getElementById('login_button').onclick = connect;
-document.getElementById('from_token_select').onclick = openModal;
-document.getElementById('to_token_select').onclick = openModal;
+document.getElementById('from_token_select').onclick = () => openModal('from');
+document.getElementById('to_token_select').onclick = () => openModal('to');
 document.getElementById('modal_close').onclick = closeModal;
