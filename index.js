@@ -36,6 +36,36 @@ function closeModal() {
   document.getElementById('token_modal').style.display = 'none';
 }
 
+async function init() {
+  console.log('initializing');
+  listAvailableTokens();
+}
+
+async function listAvailableTokens() {
+  let response = await fetch('https://tokens.coingecko.com/uniswap/all.json');
+  let tokenList = await response.json();
+  console.log('Available tokens: ', tokenList);
+  tokens = tokenList.tokens;
+  console.log('Tokens (Deserialized): ', tokens);
+
+  // Create a list of tokens for the modal
+  let parent = document.getElementById('token_list');
+  for (const token of tokens) {
+    // Create row for the token
+    let div = document.createElement('div');
+    div.className = 'token_row';
+    // Display the token image and symbol in this row
+    let html = `<img class="token_list_img" src="${token.logoURI}"> <span class="token_list_text">
+    ${token.name} (${token.symbol})</span>`;
+    div.innerHTML = html;
+    parent.appendChild(div);
+  }
+}
+
+// Get list of available tokens
+init();
+
 document.getElementById('login_button').onclick = connect;
 document.getElementById('from_token_select').onclick = openModal;
+document.getElementById('to_token_select').onclick = openModal;
 document.getElementById('modal_close').onclick = closeModal;

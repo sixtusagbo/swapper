@@ -81,3 +81,19 @@
 .gas_estimate_label {
     padding: 5px;
 }
+
+.modal-body {
+    overflow-y: scroll;
+    height: 450px;
+}
+
+.token_row {
+    display: flex;
+}
+
+.token_list_img {
+    margin-right: 1em;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
