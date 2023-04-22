@@ -1,0 +1,83 @@
+#window:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(-45deg, #000000 0%, #04619F 100%);
+    transform: translate3d(0px, 20px, 0) scale(0.95);
+    filter: blur(20px);
+    opacity: var(0.7);
+    transition: opacity 0.3s;
+    border-radius: inherit;
+}
+
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+#window::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    border-radius: inherit;
+}
+
+
+#window {
+    margin-top: 50px;
+    color: #fff;
+    padding: 15px;
+    border-radius: 20px;
+    background: rgba(22, 16, 16, 0.79);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12.5px);
+    -webkit-backdrop-filter: blur(12.5px);
+    border: 1px solid rgba(22, 16, 16, 0.3);
+}
+
+.swapbox_select {
+    width: 50%;
+    float: left;
+}
+
+.swapbox {
+    overflow: auto;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2f2f2f;
+    border-radius: 20px;
+    border: 1px solid #565656;
+}
+
+.token_select {
+    padding: 5px 0;
+}
+
+.token_select:hover {
+    background-color: #464646;
+    cursor: pointer;
+
+}
+
+.token_row {
+    padding: 5px 10px;
+}
+
+.token_row:hover {
+    background-color: #e4e4e4;
+    cursor: pointer;
+}
+
+.gas_estimate_label {
+    padding: 5px;
+}
